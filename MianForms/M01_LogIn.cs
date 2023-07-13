@@ -151,5 +151,21 @@ namespace MianForms
                 btnLogIn_Click();
             }
         }
+
+        private void btnPWChange_Click(object sender, EventArgs e)
+        {
+            // 비밀 번호 변경 버튼 을 클릭 했을 때 이벤트
+            M02_PasswordChange M02 = new M02_PasswordChange();
+            //M02.Show(); // 비동기식 윈폼 클래스 창 호출. 
+            // 모달창,동기식으로 비밀번호 변경 창 호출
+            // = 비밀번호변경 창이 닫히기 전까지 는 해당 메서드의 로직을 수행 하지 않고 기다린다. 
+
+            // 로그인 창을 잠시 숨기기. 
+            this.Visible = false;
+
+            M02.ShowDialog();
+            this.Visible = true;
+            MessageBox.Show("화면이 닫혔습니다.");
+        }
     }
 }

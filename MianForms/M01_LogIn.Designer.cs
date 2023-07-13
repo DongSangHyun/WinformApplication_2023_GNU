@@ -88,6 +88,7 @@
             this.btnPWChange.TabIndex = 5;
             this.btnPWChange.Text = "비밀번호 변경";
             this.btnPWChange.UseVisualStyleBackColor = true;
+            this.btnPWChange.Click += new System.EventHandler(this.btnPWChange_Click);
             // 
             // M01_LogIn
             // 
