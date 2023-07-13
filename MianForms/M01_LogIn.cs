@@ -21,7 +21,7 @@ namespace MianForms
 
         
 
-        private void btnLogIn_Click(object sender, EventArgs e)
+        private void btnLogIn_Click(object sender = null, EventArgs e = null)
         {
             // 로그인 버튼 을 클릭 했을때 진입점. 
 
@@ -66,29 +66,68 @@ namespace MianForms
                 // 3. 데이터 베이스 open
                 Connect.Open();
 
-                // 4. 데이터 베이스에 전달할 명령 
-                string sSqlSelect = $"SELECT * FROM TB_USER WHERE USERID = '{sUserId}' AND PW = '{sPassword}'";
+                #region < 사용자 ID 와 PW 가 동시에 일치하는 경우 로 로그인 여부 확인 > 
+                //// 4. 데이터 베이스에 전달할 명령 
+                //string sSqlSelect = $"SELECT * FROM TB_USER WHERE USERID = '{sUserId}' AND PW = '{sPassword}'";
 
-                // 5. 명령을 전달 할 클래스
+                //// 5. 명령을 전달 할 클래스
+                //SqlDataAdapter adapter = new SqlDataAdapter(sSqlSelect, Connect);
+
+                //// 6. 데이터 베이스 조회 수행 및 결과 반환. 
+                //// DataTable : C# 에서 데이터 베이스의 반환 결과 를 할당 받을 수 있는 자료구조. 
+                //DataTable dTtemp = new DataTable();
+                //adapter.Fill(dTtemp); 
+
+                //// 로그인 을 할 수 있는 사용자 인지 체크 
+                //if (dTtemp.Rows.Count == 0)
+                //{
+                //    MessageBox.Show("사용자 ID 또는 비밀번호가 잘못되었습니다.");
+                //    txtUserId.Text   = "";   // 사용자 ID
+                //    txtPassword.Text = ""; // 사용자 비밀번호 
+                //    txtUserId.Focus(); // 커서 위치 를 활성화
+                //    return;
+                //}
+
+                //string sDbUserId = dTtemp.Rows[0][0].ToString();  // 데이터 베이스 에서 받아온 사용자의 ID
+
+                #endregion
+
+                #region < T_ 로그인 할 수 없을 경우 사용자 ID 가 없는 경우인지, ID 는 일치하는데 비밀번호가 맞지 않는지 에 대한 메세지처리 및 로그인 미처리 >
+                //4. SQL 전달 명령 작성. 
+                
+                // 입력한 ID 와 동일한 데이터가 존재 할 경우 결과 행이 반환
+                string sSqlSelect = $"SELECT * FROM TB_USER WHERE USERID = '{sUserId}'";
+
+                // 5. 데이터 베이스 실행 객체 등록. 
                 SqlDataAdapter adapter = new SqlDataAdapter(sSqlSelect, Connect);
 
-                // 6. 데이터 베이스 조회 수행 및 결과 반환. 
-                // DataTable : C# 에서 데이터 베이스의 반환 결과 를 할당 받을 수 있는 자료구조. 
-                DataTable dTtemp = new DataTable();
-                adapter.Fill(dTtemp); 
+                // 6. 데이터 베이스 에서 결과(테이블 형태)를 받아올 그릇
+                DataTable dtTemp = new DataTable(); // 참조
 
-                // 로그인 을 할 수 있는 사용자 인지 체크 
-                if (dTtemp.Rows.Count == 0)
+                // 7. 명령을 실행하고 결과를 받아오기. 
+                adapter.Fill(dtTemp);
+
+                // 8. 데이터테이블이 결과 값이 없다 ? ( 등록된 ID 가 없다. )
+                if (dtTemp.Rows.Count == 0)
                 {
-                    MessageBox.Show("사용자 ID 또는 비밀번호가 잘못되었습니다.");
-                    txtUserId.Text = "";   // 사용자 ID
-                    txtPassword.Text = ""; // 사용자 비밀번호 
-                    txtUserId.Focus(); // 커서 위치 를 활성화
+                    MessageBox.Show("사용자 ID 가 존재 하지 않습니다.");
+                    txtUserId.Text   = "";   // 사용자 ID
+                    txtPassword.Text = "";   // 사용자 비밀번호 
+                    txtUserId.Focus();       // 커서 위치 를 활성화
+                    return;
+                }
+                else if (sPassword != dtTemp.Rows[0]["PW"].ToString())
+                {
+                    MessageBox.Show("비밀번호 가 일치하지 않습니다.");
+                    txtPassword.Text = "";   // 사용자 비밀번호 
+                    txtPassword.Focus();     // 커서 위치 를 활성화
                     return;
                 }
 
                 // 정상 로그인 처리 로직.
 
+                MessageBox.Show($"{dtTemp.Rows[0]["USERNAME"]} 님 반갑습니다.");
+                #endregion 
             }
             catch (Exception ex)
             {
@@ -100,6 +139,17 @@ namespace MianForms
                 Connect.Close(); 
             }
 
+        }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            // KeyEventArgs : 이벤트 메서드 를 실행 할때 던져주는 이벤트에 대한 속성 (키의 정보)
+            // 키보드의 키를 입력 할때 실행되는 메서드.
+            if (e.KeyCode == Keys.Enter)
+            {
+                // 로그인 기능을 수행. 
+                btnLogIn_Click();
+            }
         }
     }
 }
