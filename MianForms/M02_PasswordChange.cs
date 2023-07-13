@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Services_;
 
 namespace MianForms
 {
@@ -43,7 +44,8 @@ namespace MianForms
             #region < 비밀번호 변경을 할수 있는 ID 와 PW 인지 확인. >
 
             // 1. 데이터 베이스 주소 
-            string Sconnection = "Server = DESKTOP-Q580OO3\\MSSQLSERVER01; Uid = sa; Pwd = 1234; database = AppDev;";
+            Commons commons = new Commons();
+            string Sconnection = commons.Sconnection;
 
             // 2. 데이터 베이스 오픈. 
             SqlConnection connection  = new SqlConnection(Sconnection);
@@ -81,6 +83,12 @@ namespace MianForms
             #endregion
 
             #region < 비밀 번호 변경 로직 적용 >
+            // 변경 내역 적용 여부 확인하기.
+            DialogResult result = MessageBox.Show("비밀번호 변경 내역을 저장 하시겠습니까?", "비밀번호 변경", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Cancel) return;
+            // 위의 코드는 아래로 줄여서 표현 할 수 있다.
+            //if (MessageBox.Show("비밀번호 변경 내역을 저장 하시겠습니까?", "비밀번호 변경", MessageBoxButtons.YesNo) == DialogResult.Cancel) return;
+            
             try
             {
                 connection.Open();

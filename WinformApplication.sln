@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MianForms", "MianForms\MianForms.csproj", "{BEF0E3A5-DB13-4FA8-83DE-16098FB57767}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services_", "Services_\Services_.csproj", "{F6EA6806-38A8-41F2-9ED2-2AB162E6E81A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{BEF0E3A5-DB13-4FA8-83DE-16098FB57767}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEF0E3A5-DB13-4FA8-83DE-16098FB57767}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEF0E3A5-DB13-4FA8-83DE-16098FB57767}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6EA6806-38A8-41F2-9ED2-2AB162E6E81A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6EA6806-38A8-41F2-9ED2-2AB162E6E81A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6EA6806-38A8-41F2-9ED2-2AB162E6E81A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6EA6806-38A8-41F2-9ED2-2AB162E6E81A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

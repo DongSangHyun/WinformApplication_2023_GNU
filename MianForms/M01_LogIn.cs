@@ -9,6 +9,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Services_;
 
 namespace MianForms
 {
@@ -55,7 +56,10 @@ namespace MianForms
             }
 
             // 1. 데이터 베이스 접속 경로 .     
-            string Sconnection = "Server = DESKTOP-Q580OO3\\MSSQLSERVER01; Uid = sa; Pwd = 1234; database = AppDev;";
+
+            Commons commons = new Commons();
+
+            string Sconnection = commons.Sconnection;
 
             // 2. 데이터 베이스 접속 할수 있는 클래스 
             SqlConnection Connect = new SqlConnection(Sconnection);

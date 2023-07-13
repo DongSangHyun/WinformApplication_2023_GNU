@@ -58,7 +58,7 @@
             this.txtNowPW.Location = new System.Drawing.Point(111, 46);
             this.txtNowPW.Name = "txtNowPW";
             this.txtNowPW.Size = new System.Drawing.Size(223, 25);
-            this.txtNowPW.TabIndex = 3;
+            this.txtNowPW.TabIndex = 2;
             // 
             // label2
             // 
@@ -74,7 +74,7 @@
             this.txtChangePW.Location = new System.Drawing.Point(111, 77);
             this.txtChangePW.Name = "txtChangePW";
             this.txtChangePW.Size = new System.Drawing.Size(223, 25);
-            this.txtChangePW.TabIndex = 5;
+            this.txtChangePW.TabIndex = 3;
             // 
             // label3
             // 
@@ -90,7 +90,7 @@
             this.btnPWChange.Location = new System.Drawing.Point(210, 108);
             this.btnPWChange.Name = "btnPWChange";
             this.btnPWChange.Size = new System.Drawing.Size(124, 55);
-            this.btnPWChange.TabIndex = 6;
+            this.btnPWChange.TabIndex = 4;
             this.btnPWChange.Text = "비밀번호 변경";
             this.btnPWChange.UseVisualStyleBackColor = true;
             this.btnPWChange.Click += new System.EventHandler(this.btnPWChange_Click);
