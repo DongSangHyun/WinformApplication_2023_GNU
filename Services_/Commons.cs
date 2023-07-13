@@ -20,6 +20,6 @@ namespace Services_
         // Commons 
         // 시스템 에서 사용 하는 공통 변수 또는 메서드 등의 모음. 
 
-        public string Sconnection = "Server = DESKTOP-Q580OO3\\MSSQLSERVER01; Uid = sa; Pwd = 1234; database = AppDev_;";
+        public string Sconnection = "Server = DESKTOP-Q580OO3\\MSSQLSERVER01; Uid = sa; Pwd = 1234; database = AppDev;";
     }
 }
