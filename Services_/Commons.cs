@@ -20,6 +20,9 @@ namespace Services_
         // Commons 
         // 시스템 에서 사용 하는 공통 변수 또는 메서드 등의 모음. 
 
-        public string Sconnection = "Server = DESKTOP-Q580OO3\\MSSQLSERVER01; Uid = sa; Pwd = 1234; database = AppDev;";
+        // static
+        // 응용 프로그램 실행 시 최초 1회 초기화 할 때 Data 영역에 등록이 되어 
+        // 응용프로그램 이 종료 될 때 까지 상주 해 있도록 하는 키워드
+        public const string Sconnection = "Server = DESKTOP-Q580OO3\\MSSQLSERVER01; Uid = sa; Pwd = 1234; database = AppDev;";
     }
 }

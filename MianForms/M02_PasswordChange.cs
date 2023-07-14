@@ -43,9 +43,10 @@ namespace MianForms
 
             #region < 비밀번호 변경을 할수 있는 ID 와 PW 인지 확인. >
 
-            // 1. 데이터 베이스 주소 
-            Commons commons = new Commons();
-            string Sconnection = commons.Sconnection;
+            // 1. 데이터 베이스 주소  
+            string Sconnection = Commons.Sconnection;
+
+            Commons.Sconnection = "ㅋㅋㅋㅋ";
 
             // 2. 데이터 베이스 오픈. 
             SqlConnection connection  = new SqlConnection(Sconnection);

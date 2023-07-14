@@ -55,11 +55,8 @@ namespace MianForms
                 return;
             }
 
-            // 1. 데이터 베이스 접속 경로 .     
-
-            Commons commons = new Commons();
-
-            string Sconnection = commons.Sconnection;
+            // 1. 데이터 베이스 접속 경로 .      
+            string Sconnection = Commons.Sconnection;
 
             // 2. 데이터 베이스 접속 할수 있는 클래스 
             SqlConnection Connect = new SqlConnection(Sconnection);
