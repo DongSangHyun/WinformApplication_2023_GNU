@@ -35,10 +35,12 @@ namespace MianForms
             //}
             #endregion
 
-            if (login.bLoginFlag)
-            {
-                Application.Run(new M03_MainForm());
-            }
+            #region < 클래스 변수 를 이용한 로그인 여부 확인 방법 >
+            //if (login.bLoginFlag)
+            //{
+            //    Application.Run(new M03_MainForm());
+            //}
+            #endregion
 
         }
     }

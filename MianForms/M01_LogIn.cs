@@ -15,8 +15,8 @@ namespace MianForms
 {
     public partial class M01_LogIn : Form
     {
-        // 2. Login 여부를 전달 할 클래스 변수
-        public bool bLoginFlag = false;
+        //// 2. Login 여부를 전달 할 클래스 변수
+        //public bool bLoginFlag = false;
 
         public M01_LogIn()
         {
@@ -201,7 +201,7 @@ namespace MianForms
 
 
                 // Commons.bLoginFlag = true; < 정적 변수 를 이용한 로그인 결과 전달 방법 > 
-                bLoginFlag = true;
+                //bLoginFlag = true; < 클래스 변수 를 이용한 로그인 결과 전달 방법 > 
 
                 this.Close();
             }
