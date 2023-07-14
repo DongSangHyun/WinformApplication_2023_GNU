@@ -46,8 +46,6 @@ namespace MianForms
             // 1. 데이터 베이스 주소  
             string Sconnection = Commons.Sconnection;
 
-            Commons.Sconnection = "ㅋㅋㅋㅋ";
-
             // 2. 데이터 베이스 오픈. 
             SqlConnection connection  = new SqlConnection(Sconnection);
 
@@ -113,6 +111,10 @@ namespace MianForms
                 cmd.ExecuteNonQuery();
 
                 MessageBox.Show("정상적으로 비밀번호 를 변경 하였습니다.");
+
+                // 현재 화면 (비밀번호 변경) 을 닫기 
+                //this.Visible = false; // 메모리에 계속 상주 해 있으나 눈에만 보이지 않는다. 
+                this.Close(); // 비밀 번호 변경 클래스 에서 더이상 실행 할 로직이 없을 경우 화면을 종료(모달(ShowDialog) 상태를 해제)
             }
             catch (Exception ex)
             {

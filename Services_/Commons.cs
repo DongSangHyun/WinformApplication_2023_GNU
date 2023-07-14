@@ -23,6 +23,12 @@ namespace Services_
         // static
         // 응용 프로그램 실행 시 최초 1회 초기화 할 때 Data 영역에 등록이 되어 
         // 응용프로그램 이 종료 될 때 까지 상주 해 있도록 하는 키워드
+
+        // const 
+        // 변하지 않는 상수. 
+        // 기본적으로 static 의 성격을 띄고있다. 
         public const string Sconnection = "Server = DESKTOP-Q580OO3\\MSSQLSERVER01; Uid = sa; Pwd = 1234; database = AppDev;";
+
+        public static bool bLoginFlag = false; // 로그인의 성공여부를 가지고있을 변수.
     }
 }

@@ -58,6 +58,12 @@
     <Compile Include="M02_PasswordChange.Designer.cs">
       <DependentUpon>M02_PasswordChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="M03_MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="M03_MainForm.Designer.cs">
+      <DependentUpon>M03_MainForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="M01_LogIn.resx">
