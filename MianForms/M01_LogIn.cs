@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +18,10 @@ namespace MianForms
     {
         //// 2. Login 여부를 전달 할 클래스 변수
         //public bool bLoginFlag = false;
+
+        //// 사용자 명을 전달 할 클래스 변수. 
+        //public string sUserName;
+
 
         public M01_LogIn()
         {
@@ -203,6 +208,27 @@ namespace MianForms
                 // Commons.bLoginFlag = true; < 정적 변수 를 이용한 로그인 결과 전달 방법 > 
                 //bLoginFlag = true; < 클래스 변수 를 이용한 로그인 결과 전달 방법 > 
 
+                // 컬랙션 Arraylist 
+                // List 처럼 가변적으로 데이터를 관리 할 수 있으며 
+                // 데이터 유형에 관계 없이 데이터를 담을 수 있다. 
+                
+                
+                ArrayList arrayList = new ArrayList();
+                arrayList.Add(true);
+                arrayList.Add(dtTemp.Rows[0]["USERNAME"].ToString());
+
+                // 위의 코드는 아래처럼 간단히 구현 할 수 있다. 
+                // 객체 이니셜라이져
+                //ArrayList arrayList_ = new ArrayList
+                //{
+                //    true,
+                //    dtTemp.Rows[0]["USERNAME"].ToString()
+                //};
+
+
+                this.Tag = arrayList;
+
+                //sUserName = dtTemp.Rows[0]["USERNAME"].ToString();
                 this.Close();
             }
             catch (Exception ex)

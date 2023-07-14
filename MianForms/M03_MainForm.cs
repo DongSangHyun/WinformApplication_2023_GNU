@@ -16,5 +16,10 @@ namespace MianForms
         {
             InitializeComponent();
         }
+        public M03_MainForm(string sUserName)
+        {
+            InitializeComponent();
+            stsUserName.Text = sUserName;
+        }
     }
 }

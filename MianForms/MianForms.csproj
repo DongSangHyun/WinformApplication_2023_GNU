@@ -72,6 +72,9 @@
     <EmbeddedResource Include="M02_PasswordChange.resx">
       <DependentUpon>M02_PasswordChange.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="M03_MainForm.resx">
+      <DependentUpon>M03_MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -80,6 +83,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -99,6 +103,24 @@
       <Project>{f6ea6806-38a8-41f2-9ed2-2ab162e6e81a}</Project>
       <Name>Services_</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BtnSearch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BtnAdd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BtnSaveB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BtnDelete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BtnClose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BtcExit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
