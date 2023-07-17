@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.BaseM = new System.Windows.Forms.ToolStripMenuItem();
+            this.ItemMaster = new System.Windows.Forms.ToolStripMenuItem();
+            this.UserMaster = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
@@ -44,18 +47,47 @@
             this.stsUserName = new System.Windows.Forms.ToolStripStatusLabel();
             this.stsNowDate = new System.Windows.Forms.ToolStripStatusLabel();
             this.timNowDate = new System.Windows.Forms.Timer(this.components);
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.BaseM});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(942, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(942, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // BaseM
+            // 
+            this.BaseM.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ItemMaster,
+            this.UserMaster});
+            this.BaseM.Name = "BaseM";
+            this.BaseM.Size = new System.Drawing.Size(83, 24);
+            this.BaseM.Text = "기준정보";
+            this.BaseM.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.BaseM_DropDownItemClicked);
+            // 
+            // ItemMaster
+            // 
+            this.ItemMaster.Name = "ItemMaster";
+            this.ItemMaster.Size = new System.Drawing.Size(224, 26);
+            this.ItemMaster.Text = "품목 마스터";
+            // 
+            // UserMaster
+            // 
+            this.UserMaster.Name = "UserMaster";
+            this.UserMaster.Size = new System.Drawing.Size(224, 26);
+            this.UserMaster.Text = "사용자 마스터";
             // 
             // toolStrip1
             // 
@@ -69,7 +101,7 @@
             this.toolStripSeparator1,
             this.btnClose,
             this.btnExit});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(942, 100);
             this.toolStrip1.TabIndex = 1;
@@ -193,11 +225,42 @@
             this.timNowDate.Interval = 1000;
             this.timNowDate.Tick += new System.EventHandler(this.timNowDate_Tick);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(466, 187);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(200, 100);
+            this.tabControl1.TabIndex = 3;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(192, 71);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(192, 71);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // M03_MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(942, 428);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -207,10 +270,13 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.M03_MainForm_FormClosing);
             this.Load += new System.EventHandler(this.M03_MainForm_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -233,5 +299,11 @@
         private System.Windows.Forms.ToolStripStatusLabel stsUserName;
         private System.Windows.Forms.ToolStripStatusLabel stsNowDate;
         private System.Windows.Forms.Timer timNowDate;
+        private System.Windows.Forms.ToolStripMenuItem BaseM;
+        private System.Windows.Forms.ToolStripMenuItem ItemMaster;
+        private System.Windows.Forms.ToolStripMenuItem UserMaster;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }

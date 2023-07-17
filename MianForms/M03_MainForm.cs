@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using FormList;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -90,8 +92,24 @@ namespace MianForms
             // 2. 프로그램 종료 여부 의  결과 가 Yes 인경우. 
             // 구동 되고 있는 스레드를 종료.
             if (thread_NowDate.IsAlive) thread_NowDate.Abort(); // 스레드 종료.
-        } 
+        }
         #endregion
 
+        private void BaseM_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            // 기준정보 리스트에 있는 매뉴 클릭 할 경우.
+
+            if (e.ClickedItem.Name == "ItemMaster")
+            {
+                ItemMaster itemmaster = new ItemMaster();
+                itemmaster.Show();
+            }
+
+            else if (e.ClickedItem.Name == "UserMaster")
+            {
+                UserMaster usermaster = new UserMaster();
+                usermaster.Show();
+            }
+        }
     }
 }
