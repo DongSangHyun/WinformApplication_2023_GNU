@@ -85,8 +85,7 @@ namespace MianForms
             {
                 e.Cancel = true;
                 return;
-            }
-
+            } 
 
             // 2. 프로그램 종료 여부 의  결과 가 Yes 인경우. 
             // 구동 되고 있는 스레드를 종료.
