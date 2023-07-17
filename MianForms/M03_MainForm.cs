@@ -117,6 +117,20 @@ namespace MianForms
 
             #region < 매뉴의 Name 문자열 을 가지고있는 클래스를 호출할 경우 > 
 
+            // 이미 탭 페이지에 등록 되어있는 화면 을 매뉴에서 선택한 경우 
+            // 해당 탭 페이지를 활성화. 
+            // 그렇지 않을 경우 탭페이지에 추가 하여 탭컨트롤에 표현.
+            
+            for (int i = 0; i < tabMyTab.TabPages.Count; i++)
+            {
+                if (tabMyTab.TabPages[i].Name == e.ClickedItem.Name)
+                {
+                    // 텝 페이지의 이름과 매뉴의 이름이 같다. ( 등록된 페이지를 활성화 ) 
+                    tabMyTab.SelectedTab = tabMyTab.TabPages[i];
+                    return;
+                }
+            }
+
             // Assembly : 프로젝트 (dll) 파일 의 클래스 를 추출 하고 관리 할수 있는 클래스.
 
             // DLL 파일이 있는 위치 를 찾기 . 
