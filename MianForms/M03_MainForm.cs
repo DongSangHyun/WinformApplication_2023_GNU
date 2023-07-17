@@ -65,5 +65,22 @@ namespace MianForms
             }
         }
         #endregion
+
+        #region < 종료 버튼 클릭 > 
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            //this.Close();
+            Application.Exit(); // 응용 프로그램의 종료.
+        }
+
+
+        private void M03_MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // 프로그램이 종료 될때 . 
+        }
+
+
+        #endregion
+
     }
 }
