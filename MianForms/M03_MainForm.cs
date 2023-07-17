@@ -13,6 +13,8 @@ namespace MianForms
 {
     public partial class M03_MainForm : Form
     {
+        Thread thread_NowDate;
+
         public M03_MainForm()
         {
             InitializeComponent();
@@ -39,7 +41,7 @@ namespace MianForms
             ThreadStart StartThread = new ThreadStart(TimeShow);
 
             // 2-2 델리게이트 를 실행할 Thread 클래스 생성. 
-            Thread thread_NowDate = new Thread(StartThread);
+            thread_NowDate = new Thread(StartThread);
 
             // 2-3 스레드 시작. 
             thread_NowDate.Start();
@@ -77,9 +79,19 @@ namespace MianForms
         private void M03_MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             // 프로그램이 종료 될때 . 
-        }
+            // 1. 프로그램 종료 여부를 확인. 
+            DialogResult Result = MessageBox.Show("프로그램을 종료 하시겠습니까 ?","프로그램종료",MessageBoxButtons.YesNo);
+            if (Result == DialogResult.No)
+            {
+                e.Cancel = true;
+                return;
+            }
 
 
+            // 2. 프로그램 종료 여부 의  결과 가 Yes 인경우. 
+            // 구동 되고 있는 스레드를 종료.
+            if (thread_NowDate.IsAlive) thread_NowDate.Abort(); // 스레드 종료.
+        } 
         #endregion
 
     }
