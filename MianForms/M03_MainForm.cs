@@ -102,7 +102,7 @@ namespace MianForms
             if (e.ClickedItem.Name == "ItemMaster")
             {
                 ItemMaster itemmaster = new ItemMaster();
-                itemmaster.Show();
+                itemmaster.Show(); 
             }
 
             else if (e.ClickedItem.Name == "UserMaster")
