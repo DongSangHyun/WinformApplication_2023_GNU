@@ -1,5 +1,6 @@
 ﻿using Services_;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.AccessControl;
@@ -43,10 +44,10 @@ namespace MianForms
             #endregion
 
             #region < Tag 속성을 이용한 로그인 여부 확인 방법 > 
-            string a = login.sUserName;
-            if (login.Tag != null && (bool)login.Tag == true)
+            ArrayList List = login.Tag as  ArrayList;
+            if (List != null && (bool)List[0] == true)
             {
-                Application.Run(new M03_MainForm(login.sUserName));
+                Application.Run(new M03_MainForm(List[1].ToString()));
             }
             #endregion 
         }
