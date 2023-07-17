@@ -1,5 +1,4 @@
-﻿using Services_;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FormList
+namespace Services_
 {
-    public partial class UserMaster : BaseChildForm
+    public partial class BaseChildForm : Form
     {
-        public UserMaster()
+        public BaseChildForm()
         {
             InitializeComponent();
         }

@@ -58,8 +58,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Services_\Services_.csproj">
+      <Project>{f6ea6806-38a8-41f2-9ed2-2ab162e6e81a}</Project>
+      <Name>Services_</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="ItemMaster.resx">
       <DependentUpon>ItemMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMaster.resx">
+      <DependentUpon>UserMaster.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

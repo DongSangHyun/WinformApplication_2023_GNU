@@ -28,10 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // UserMaster
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "UserMaster";
+            this.Location = new System.Drawing.Point(0, 0);
+            this.Name = "UserMaster";
+            this.Text = "사용자 마스터";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

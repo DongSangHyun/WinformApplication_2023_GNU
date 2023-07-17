@@ -35,9 +35,9 @@ namespace Services_
             page.Name = NewForm.Name;   // 페이지 의 Name 은 추가 Form 의 Name 을 등록.
 
             
-            base.TabPages.Add(page); // 생성 된 탭 페이지 를 탭 컨트롤에 추가. 
-            NewForm.Show(); // 추가되는 Form 클래스 를 표현. 
-            base.SelectedTab = page; // 추가한 페이지를 활성화.
+            base.TabPages.Add(page);    // 생성 된 탭 페이지 를 탭 컨트롤에 추가. 
+            NewForm.Show();             // 추가되는 Form 클래스 를 표현. 
+            base.SelectedTab = page;    // 추가한 페이지를 활성화.
         }
     }
 }

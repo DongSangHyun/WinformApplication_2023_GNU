@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -99,17 +100,38 @@ namespace MianForms
         {
             // 기준정보 리스트에 있는 매뉴 클릭 할 경우.
 
-            if (e.ClickedItem.Name == "ItemMaster")
-            {
-                ItemMaster itemmaster = new ItemMaster();
-                itemmaster.Show(); 
-            }
+            #region < 매뉴 의 클래스를 하나하나 호출 해야 하는 경우 > 
+            //if (e.ClickedItem.Name == "ItemMaster")
+            //{
+            //    tabMyTab.AddForm(new ItemMaster());
+            //}
 
-            else if (e.ClickedItem.Name == "UserMaster")
-            {
-                UserMaster usermaster = new UserMaster();
-                usermaster.Show();
-            }
+            //else if (e.ClickedItem.Name == "UserMaster")
+            //{
+            //    tabMyTab.AddForm(new UserMaster());
+            //}
+
+            // 매뉴에서 호출해야 하는 클래스(윈폼 화면) 가 증가 할 수록 
+            // 로직이 길어지고 유지보수 및 확장성 등 비효율적인 코딩이 될 수 있다
+            #endregion
+
+            #region < 매뉴의 Name 문자열 을 가지고있는 클래스를 호출할 경우 > 
+
+            // Assembly : 프로젝트 (dll) 파일 의 클래스 를 추출 하고 관리 할수 있는 클래스.
+
+            // DLL 파일이 있는 위치 를 찾기 . 
+            // Application.StartupPath : 응용 프로그램이 실행 되는 위치 . "\\" = \ 
+            Assembly assem = Assembly.LoadFrom(Application.StartupPath + "\\" + "FormList.DLL");
+
+            // Type : 파일 형식으로 되어있는 클래스 유형을 Winform 형식의 Form 클래스 로 변형 시켜 주는 클래스.
+            Type typeForm = assem.GetType("FormList." + e.ClickedItem.Name.ToString(), true);
+
+            // 파일에서 추출 한 클래스 를 Form 형식으로 변형. 
+            Form ShowForm = (Form)Activator.CreateInstance(typeForm);
+
+            // 추출한 클래스를 Form 형식으로 만든 후 TabControl 에 추가. 
+            tabMyTab.AddForm(ShowForm);
+            #endregion
         }
     }
 }
