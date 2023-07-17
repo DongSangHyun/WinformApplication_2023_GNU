@@ -163,6 +163,7 @@
             this.btnClose.Text = "닫기";
             this.btnClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnExit
             // 

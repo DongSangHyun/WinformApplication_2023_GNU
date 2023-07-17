@@ -147,5 +147,12 @@ namespace MianForms
             tabMyTab.AddForm(ShowForm);
             #endregion
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            // 닫기 버튼을 클릭 시 기능. 
+            if (tabMyTab.TabPages.Count == 0) return;
+            tabMyTab.SelectedTab.Dispose();
+        }
     }
 }
