@@ -177,22 +177,22 @@
             // rdoProduct
             // 
             this.rdoProduct.AutoSize = true;
-            this.rdoProduct.Checked = true;
             this.rdoProduct.Location = new System.Drawing.Point(594, 70);
             this.rdoProduct.Name = "rdoProduct";
             this.rdoProduct.Size = new System.Drawing.Size(58, 19);
             this.rdoProduct.TabIndex = 11;
-            this.rdoProduct.TabStop = true;
             this.rdoProduct.Text = "생산";
             this.rdoProduct.UseVisualStyleBackColor = true;
             // 
             // rdoEnd
             // 
             this.rdoEnd.AutoSize = true;
+            this.rdoEnd.Checked = true;
             this.rdoEnd.Location = new System.Drawing.Point(658, 70);
             this.rdoEnd.Name = "rdoEnd";
             this.rdoEnd.Size = new System.Drawing.Size(58, 19);
             this.rdoEnd.TabIndex = 12;
+            this.rdoEnd.TabStop = true;
             this.rdoEnd.Text = "단종";
             this.rdoEnd.UseVisualStyleBackColor = true;
             // 

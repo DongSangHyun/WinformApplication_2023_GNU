@@ -15,6 +15,9 @@ namespace FormList
         // 클래스 내에서 전역으로 사용할 데이터 테이블 (참조)
         DataTable dtTemp = new DataTable();
 
+        // 데이터 베이스 접속 
+        SqlConnection sCon = new SqlConnection(Commons.Sconnection);
+
         public ItemMaster()
         {
             InitializeComponent();
@@ -85,8 +88,7 @@ namespace FormList
             // 해 주는 기능이 있는 디자인 컨트롤  (클래스)
             // 데이터 베이스에 등록 되어있는 품목의 유형을 콤보박스에 셋팅 하고 사용자가 선택하도록 유도. 
 
-            // 데이터 베이스 접속 
-            SqlConnection sCon = new SqlConnection(Commons.Sconnection);
+            
             try
             {
                 // 데이터 베이스 오픈. 
@@ -123,11 +125,52 @@ namespace FormList
         public override void DoInquire()
         {
            // 품목을 조회 할 때 수행하는 기능.  
+           try
+            {
+                sCon.Open();
+
+                // 그리드 데이터 초기화 
+                dtTemp.Clear();
+                 
+                // 조회 조건의 데이 를 변수에 담기 . 
+                string sItemCode = txtItemCode.Text; // 사용자가 입력한 품목 코드 
+                string sItemName = txtItemName.Text; // 사용자가 입력한 품목 명
+                string sStart    = dtpStart.Text;    // 사용자가 입력한 출시 시작 일자 .
+                string sEnd      = dtpEnd.Text;      // 사용자가 입력한 출시 종료 일자 범위
+                string sItemType  = cboItemType.SelectedValue as string; // 선택한 콤보박스(품목 유형) 코드값.
+                string sItemNameOnly = chkNameOnly.Checked == true ? "Y" : "N";
+                string sEndFalg = rdoProduct.Checked == true ? "N" : "Y"; // 생산 / 단종 여부.
+
+                // 조회 해 올 데이터베이스에 전달 할 명령문 작성.
+                string sSqlSelect = " SELECT *                                        " +
+                                    "   FROM TB_ItemMaster                            " +
+                                    $" WHERE ITEMCODE LIKE '%{sItemCode}%'                 " +
+                                    $"   AND ITEMNAME LIKE '%{sItemName}%'                 " +
+                                    $"   AND PRODDATE BETWEEN '{sStart}' AND '{sEnd}' " +
+                                    $"   AND ITEMTYPE = '{sItemType}'                 " +
+                                    $"   AND ENDFLAG  = '{sEndFalg}'                  ";
+
+                SqlDataAdapter adapter = new SqlDataAdapter(sSqlSelect, sCon);
+                adapter.Fill(dtTemp);
+
+                // 데이터 베이스에서 받아온 결과 를 그리드에 표현
+                Grid.DataSource = dtTemp;
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                sCon.Close();
+            }
         }
 
         public override void DoSave()
         {
             base.DoSave();
+
         }
     }
 }

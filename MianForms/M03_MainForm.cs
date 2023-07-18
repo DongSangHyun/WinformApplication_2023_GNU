@@ -1,5 +1,6 @@
 ﻿
 using FormList;
+using Services_;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -159,20 +160,38 @@ namespace MianForms
         {
             if (tabMyTab.TabPages.Count == 0) return;
 
-            if (tabMyTab.SelectedTab.Name == "ItemMaster")
-            {
-                // 지금 열려있는 탭 페이지의 화면을 품목마스터 로 받은 후 조회를 실행
-                // tabMyTab.SelectedTab.Controls[0] : 텝 페이지 에 등록 된 0순위의 클래스. (ItemMaster)
-                ItemMaster item_master = tabMyTab.SelectedTab.Controls[0] as ItemMaster;
-                item_master.Search();
-            }
-            if (tabMyTab.SelectedTab.Name == "UserMaster")
-            {
-                // 지금 열려있는 탭 페이지의 화면을 사용자마스터 로 받은 후 조회를 실행
-                // tabMyTab.SelectedTab.Controls[0] : 텝 페이지 에 등록 된 0순위의 클래스. (ItemMaster)
-                UserMaster user_master = tabMyTab.SelectedTab.Controls[0] as UserMaster;
-                user_master.DoFind();
-            }
+            #region < 다형성을 적용하지 않은 예 >
+            //if (tabMyTab.SelectedTab.Name == "ItemMaster")
+            //{
+            //    // 지금 열려있는 탭 페이지의 화면을 품목마스터 로 받은 후 조회를 실행
+            //    // tabMyTab.SelectedTab.Controls[0] : 텝 페이지 에 등록 된 0순위의 클래스. (ItemMaster)
+            //    ItemMaster item_master = tabMyTab.SelectedTab.Controls[0] as ItemMaster;
+            //    item_master.DoInquire();
+            //}
+            //if (tabMyTab.SelectedTab.Name == "UserMaster")
+            //{
+            //    // 지금 열려있는 탭 페이지의 화면을 사용자마스터 로 받은 후 조회를 실행
+            //    // tabMyTab.SelectedTab.Controls[0] : 텝 페이지 에 등록 된 0순위의 클래스. (ItemMaster)
+            //    UserMaster user_master = tabMyTab.SelectedTab.Controls[0] as UserMaster;
+            //    user_master.DoInquire();
+            //}
+
+            // 불필요하게 클래스가 많아질경우 소스가 길어질수 있다 비효율적.
+            #endregion
+            #region < 다형성을 적용한 예제 >
+            //BaseChildForm BS = tabMyTab.SelectedTab.Controls[0] as BaseChildForm;
+
+            // ItemMaster, UserMaster 클래스 가 부모 클래스 인 BasChidForm 클래스로 UPCasting
+            // BCH 객체 는  ItemMaster, UserMaster 의 기능을 대신 수행할 수 있는 다형성 이 구현된 상태
+            
+            BaseChildForm BCH = (BaseChildForm)tabMyTab.SelectedTab.Controls[0];
+            BCH.DoInquire();
+
+            // 다형성 
+            // 자식 클래스 가 부모 클래스 형으로 변환 되어 
+            // 자식 클래스 가 가지고 있는 기능을 부모 클래스가 대신 수행할수 있도록 하는 개념
+            // 다형성을 구현 하는 기능 Upcasting;
+            #endregion
         }
     }
 }

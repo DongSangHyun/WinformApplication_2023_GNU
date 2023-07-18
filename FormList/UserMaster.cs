@@ -22,6 +22,11 @@ namespace FormList
         {
             // 사용자 의 정보를 조회 하는 기능. 
         }
+
+        public void Print()
+        {
+            // 출력. 
+        }
         
     }
 }
