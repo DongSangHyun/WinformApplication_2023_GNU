@@ -17,5 +17,11 @@ namespace FormList
         {
             InitializeComponent();
         }
+        
+        public override void DoInquire()
+        {
+            // 사용자 의 정보를 조회 하는 기능. 
+        }
+        
     }
 }

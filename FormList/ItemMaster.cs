@@ -120,9 +120,14 @@ namespace FormList
             } 
         }
 
-        public void Search()
+        public override void DoInquire()
         {
-            MessageBox.Show("품목을 조회 합니다. ");
+           // 품목을 조회 할 때 수행하는 기능.  
+        }
+
+        public override void DoSave()
+        {
+            base.DoSave();
         }
     }
 }

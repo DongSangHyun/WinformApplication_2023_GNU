@@ -157,10 +157,23 @@ namespace MianForms
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            // 지금 열려있는 탭 페이지의 화면을 품목마스터 로 받은 후 조회를 실행
-            // tabMyTab.SelectedTab.Controls[0] : 텝 페이지 에 등록 된 0순위의 클래스. (ItemMaster)
-            ItemMaster item_master =  tabMyTab.SelectedTab.Controls[0] as ItemMaster;
-            item_master.Search();
+            if (tabMyTab.TabPages.Count == 0) return;
+
+            if (tabMyTab.SelectedTab.Name == "ItemMaster")
+            {
+                // 지금 열려있는 탭 페이지의 화면을 품목마스터 로 받은 후 조회를 실행
+                // tabMyTab.SelectedTab.Controls[0] : 텝 페이지 에 등록 된 0순위의 클래스. (ItemMaster)
+                ItemMaster item_master = tabMyTab.SelectedTab.Controls[0] as ItemMaster;
+                item_master.Search();
+            }
+            if (tabMyTab.SelectedTab.Name == "UserMaster")
+            {
+                // 지금 열려있는 탭 페이지의 화면을 사용자마스터 로 받은 후 조회를 실행
+                // tabMyTab.SelectedTab.Controls[0] : 텝 페이지 에 등록 된 0순위의 클래스. (ItemMaster)
+                UserMaster user_master = tabMyTab.SelectedTab.Controls[0] as UserMaster;
+                user_master.DoFind();
+            }
         }
     }
 }
+
