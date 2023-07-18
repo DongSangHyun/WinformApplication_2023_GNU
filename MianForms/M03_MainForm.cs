@@ -88,7 +88,7 @@ namespace MianForms
             {
                 e.Cancel = true;
                 return;
-            } 
+            }
 
             // 2. 프로그램 종료 여부 의  결과 가 Yes 인경우. 
             // 구동 되고 있는 스레드를 종료.
@@ -153,6 +153,14 @@ namespace MianForms
             // 닫기 버튼을 클릭 시 기능. 
             if (tabMyTab.TabPages.Count == 0) return;
             tabMyTab.SelectedTab.Dispose();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            // 지금 열려있는 탭 페이지의 화면을 품목마스터 로 받은 후 조회를 실행
+            // tabMyTab.SelectedTab.Controls[0] : 텝 페이지 에 등록 된 0순위의 클래스. (ItemMaster)
+            ItemMaster item_master =  tabMyTab.SelectedTab.Controls[0] as ItemMaster;
+            item_master.Search();
         }
     }
 }

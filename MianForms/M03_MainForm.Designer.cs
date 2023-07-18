@@ -77,13 +77,13 @@
             // ItemMaster
             // 
             this.ItemMaster.Name = "ItemMaster";
-            this.ItemMaster.Size = new System.Drawing.Size(224, 26);
+            this.ItemMaster.Size = new System.Drawing.Size(187, 26);
             this.ItemMaster.Text = "품목 마스터";
             // 
             // UserMaster
             // 
             this.UserMaster.Name = "UserMaster";
-            this.UserMaster.Size = new System.Drawing.Size(224, 26);
+            this.UserMaster.Size = new System.Drawing.Size(187, 26);
             this.UserMaster.Text = "사용자 마스터";
             // 
             // toolStrip1
@@ -114,6 +114,7 @@
             this.btnSearch.Text = "조회";
             this.btnSearch.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnAdd
             // 
