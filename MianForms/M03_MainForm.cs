@@ -4,10 +4,12 @@ using Services_;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -156,43 +158,99 @@ namespace MianForms
             tabMyTab.SelectedTab.Dispose();
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        #region < 툴바의 개별적인 기능 구현 소스 > 
+        //private void btnSearch_Click(object sender, EventArgs e)
+        //{
+        //    if (tabMyTab.TabPages.Count == 0) return;
+
+        //    #region < 다형성을 적용하지 않은 예 >
+        //    //if (tabMyTab.SelectedTab.Name == "ItemMaster")
+        //    //{
+        //    //    // 지금 열려있는 탭 페이지의 화면을 품목마스터 로 받은 후 조회를 실행
+        //    //    // tabMyTab.SelectedTab.Controls[0] : 텝 페이지 에 등록 된 0순위의 클래스. (ItemMaster)
+        //    //    ItemMaster item_master = tabMyTab.SelectedTab.Controls[0] as ItemMaster;
+        //    //    item_master.DoInquire();
+        //    //}
+        //    //if (tabMyTab.SelectedTab.Name == "UserMaster")
+        //    //{
+        //    //    // 지금 열려있는 탭 페이지의 화면을 사용자마스터 로 받은 후 조회를 실행
+        //    //    // tabMyTab.SelectedTab.Controls[0] : 텝 페이지 에 등록 된 0순위의 클래스. (ItemMaster)
+        //    //    UserMaster user_master = tabMyTab.SelectedTab.Controls[0] as UserMaster;
+        //    //    user_master.DoInquire();
+        //    //}
+
+        //    // 불필요하게 클래스가 많아질경우 소스가 길어질수 있다 비효율적.
+        //    #endregion
+
+        //    #region < 다형성을 적용한 예제 >
+        //    //BaseChildForm BS = tabMyTab.SelectedTab.Controls[0] as BaseChildForm;
+
+        //    // ItemMaster, UserMaster 클래스 가 부모 클래스 인 BasChidForm 클래스로 UPCasting
+        //    // BCH 객체 는  ItemMaster, UserMaster 의 기능을 대신 수행할 수 있는 다형성 이 구현된 상태
+
+        //    BaseChildForm BCH = (BaseChildForm)tabMyTab.SelectedTab.Controls[0];
+        //    BCH.DoInquire();
+
+        //    // 다형성 
+        //    // 자식 클래스 가 부모 클래스 형으로 변환 되어 
+        //    // 자식 클래스 가 가지고 있는 기능을 부모 클래스가 대신 수행할수 있도록 하는 개념
+        //    // 다형성을 구현 하는 기능 Upcasting;
+        //    #endregion
+        //}
+
+        //private void btnAdd_Click(object sender, EventArgs e)
+        //{
+        //    // 다형성을 통한 자식 클래스의 추가 기능 수행.
+        //    BaseChildForm BCH = tabMyTab.SelectedTab.Controls[0] as BaseChildForm;
+        //    BCH.DoNew();
+        //}
+
+        //private void btnDelete_Click(object sender, EventArgs e)
+        //{
+        //    // 다형성을 통한 자식 클래스의 삭제 기능 수행.
+        //    BaseChildForm BCH = tabMyTab.SelectedTab.Controls[0] as BaseChildForm;
+        //    BCH.DoDelete();
+        //}
+
+        //private void btnSave_Click(object sender, EventArgs e)
+        //{
+        //    // 다형성을 통한 자식 클래스의 저장 기능 수행.
+        //    BaseChildForm BCH = tabMyTab.SelectedTab.Controls[0] as BaseChildForm;
+        //    BCH.DoSave();
+        //}
+
+        #endregion
+
+        #region < 툴바의 공통 기능 구현 소스 > 
+        // 조회 / 추가 / 삭제 / 저장 버튼이 공통으로 수행할 메서드.
+        // 메서드 가 구현되는 틀, 방식 (인수의 개수, 데이터 타입, 반환형식 ) = 메서드 의 시그니쳐
+        // 조회 / 추가 / 삭제 / 저장 버튼 이 동일한 메서드의 시그니쳐 를 가지고 있기 때문에 
+        // 아래의 로직이 가능하다. 
+        private void efgierlgkllkherg(object sender_, EventArgs ea)
         {
-            if (tabMyTab.TabPages.Count == 0) return;
+            // 버튼의 종류 구분하기 . 
+            ToolStripButton TSB = sender_ as ToolStripButton;
 
-            #region < 다형성을 적용하지 않은 예 >
-            //if (tabMyTab.SelectedTab.Name == "ItemMaster")
-            //{
-            //    // 지금 열려있는 탭 페이지의 화면을 품목마스터 로 받은 후 조회를 실행
-            //    // tabMyTab.SelectedTab.Controls[0] : 텝 페이지 에 등록 된 0순위의 클래스. (ItemMaster)
-            //    ItemMaster item_master = tabMyTab.SelectedTab.Controls[0] as ItemMaster;
-            //    item_master.DoInquire();
-            //}
-            //if (tabMyTab.SelectedTab.Name == "UserMaster")
-            //{
-            //    // 지금 열려있는 탭 페이지의 화면을 사용자마스터 로 받은 후 조회를 실행
-            //    // tabMyTab.SelectedTab.Controls[0] : 텝 페이지 에 등록 된 0순위의 클래스. (ItemMaster)
-            //    UserMaster user_master = tabMyTab.SelectedTab.Controls[0] as UserMaster;
-            //    user_master.DoInquire();
-            //}
+            // 조회 , 추가 , 삭제 , 저장 버튼에 따른 기능 수행하기 로직. 
+            BaseChildForm BCH = tabMyTab.SelectedTab.Controls[0] as BaseChildForm;
 
-            // 불필요하게 클래스가 많아질경우 소스가 길어질수 있다 비효율적.
-            #endregion
-            #region < 다형성을 적용한 예제 >
-            //BaseChildForm BS = tabMyTab.SelectedTab.Controls[0] as BaseChildForm;
-
-            // ItemMaster, UserMaster 클래스 가 부모 클래스 인 BasChidForm 클래스로 UPCasting
-            // BCH 객체 는  ItemMaster, UserMaster 의 기능을 대신 수행할 수 있는 다형성 이 구현된 상태
-            
-            BaseChildForm BCH = (BaseChildForm)tabMyTab.SelectedTab.Controls[0];
-            BCH.DoInquire();
-
-            // 다형성 
-            // 자식 클래스 가 부모 클래스 형으로 변환 되어 
-            // 자식 클래스 가 가지고 있는 기능을 부모 클래스가 대신 수행할수 있도록 하는 개념
-            // 다형성을 구현 하는 기능 Upcasting;
-            #endregion
+            switch (TSB.Tag.ToString())
+            {
+                case "SEARCH":
+                    BCH.DoInquire();
+                    break;
+                case "NEW":
+                    BCH.DoNew();
+                    break;
+                case "DELETE":
+                    BCH.DoDelete();
+                    break;
+                case "SAVE":
+                    BCH.DoSave();
+                break;
+            } 
         }
+        #endregion
     }
 }
 
