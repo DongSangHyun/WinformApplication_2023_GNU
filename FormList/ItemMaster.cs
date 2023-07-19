@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Windows.Forms;
 
@@ -75,7 +77,7 @@ namespace FormList
 
 
             //컬럼의 수정 여부를 지정
-            Grid.Columns["ITEMCODE"].ReadOnly = true;
+            //Grid.Columns["ITEMCODE"].ReadOnly = true;
             Grid.Columns["MAKER"].ReadOnly = true;
             Grid.Columns["MAKEDATE"].ReadOnly = true;
             Grid.Columns["EDITDATE"].ReadOnly = true;
@@ -207,8 +209,104 @@ namespace FormList
 
         public override void DoSave()
         {
-            base.DoSave();
+            // 일괄 저장. 
 
+            DataTable dtChange = new DataTable();
+            
+            // 품목 의 정보 가 갱신 된 데이터 를 추출 . 
+            dtChange = dtTemp.GetChanges();
+
+            // 수정 한 행이 없을경우. 
+            if (dtChange.Rows.Count == 0) return;
+
+
+            if (MessageBox.Show("변경된 내역을 등록 하시겠습니까? ","데이터 저장",MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+
+            // 1. 데이터 베이스 오픈
+            sCon.Open();
+
+            // 데이터 베이스에 접속 하여 SQL 구문을 실행 
+            // 2. SQL Command 객체 생성. (U/D/I) 
+            SqlCommand cmd = new SqlCommand();
+
+            // 3. 데이터 베이스에 접속 정보 전달. 
+            cmd.Connection = sCon;
+
+            // 4. 트랜잭션 설정. ( 일괄 승인 , 일괄 복원 ) 
+            cmd.Transaction = sCon.BeginTransaction();
+            // 트랜 잭션 (Transaction) 
+            // . 데이터 갱신 내역을 승인 또는 복구 하는 기능. 
+            //   - 데이터의 일관성 (하나의 데이터 라도 오류가 발생할 경우 전체 데이터를 복원하여 일부 데이터만 격차가 발생되는 현상을 막기 위함)
+
+            // DataRow : 데이터 테이블의 행을 단위별로 담는 클래스.
+
+
+            string sItemCode = string.Empty; // 품목코드 
+            string sItemName = string.Empty; // 품목 명
+            string sItemType = string.Empty; // 품목유형
+            string sItemDesc = string.Empty; // 품목 상세
+            string sEndFlag = string.Empty;  // 단종 여부 
+            string sProdDate = string.Empty; // 출시일자. 
+            try
+            {
+                string Sql      = string.Empty; // 행의 상태에 따라 처리할 SQL 구문 . 
+                string sMessage = string.Empty; // 필수 입력값 누락 여부.
+                foreach (DataRow dr in dtChange.Rows)
+                {
+                    // 변경된 행을 하나씩 추출 하여 행의 상태에 따라서 데이터 베이스에 처리.
+                    switch (dr.RowState)
+                    {
+                        case DataRowState.Deleted:
+                            dr.RejectChanges();
+                            Sql = $" DELETE TB_ItemMaster WHERE ITEMCODE = '{dr["ITEMCODE"]}'";
+                            break;
+                        case DataRowState.Added:
+                            sItemCode = dr["ITEMCODE"].ToString();
+                            sItemName = dr["ITEMNAME"].ToString();
+                            sItemType = dr["ITEMTYPE"].ToString();
+                            sItemDesc = dr["ITEMDESC"].ToString();
+                            //삼항 연산자 true false 에 따른 비교 분기.
+                            // 단종 여부에 값이 없을 경우 N 아닐 경우는 Y (무조건 N, 또는 Y 만 입력 가능 하도록)
+                            sEndFlag  = dr["ENDFLAG"].ToString() == "" ? "N" : "Y";
+                            sProdDate = dr["PRODDATE"].ToString();
+
+                            // 품목 코드, 출시 일자 정보 누락 시 체크 밸리데이션;
+                            if (sItemCode == "") sMessage += "품목 코드";
+                            if (sProdDate == "") sMessage += " 출시일자";
+                            if (sMessage != "")
+                            {
+                                MessageBox.Show($"{sMessage} 를 입력하지 않았습니다.");
+                                cmd.Transaction.Rollback();
+                                return;
+                            }
+
+                            // 데이터가 없는경우 INSERT
+                            cmd.CommandText = "INSERT INTO TB_ItemMaster(ITEMCODE,      ITEMNAME,     ITEMTYPE,     ITEMDESC2,     ENDFLAG,     PRODDATE,    MAKEDATE,     MAKER) " +
+                                             $"                 VALUES('{sItemCode}','{sItemName}','{sItemType}', '{sItemDesc}','{sEndFlag}','{sProdDate}',GETDATE(),      'ADMIN');";
+                            break;
+                        case DataRowState.Modified:
+                            break;
+                    }
+                    cmd.CommandText = Sql; // 커맨드에 실행할 SQL 명령 등록. 
+                    cmd.ExecuteNonQuery(); // 커맨드를 실행 .  
+                }
+
+                // 정상 등록 완료. 
+                cmd.Transaction.Commit();
+                MessageBox.Show("정상 처리 되었습니다.");
+            }
+            catch (Exception ex)
+            {
+                cmd.Transaction.Rollback(); // 예외상황 발생 시 복구.
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            { 
+                sCon.Close(); 
+            }
         }
         #endregion 
 
